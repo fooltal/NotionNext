@@ -78,7 +78,7 @@ export async function getStaticProps({
   }
 
   if (!props?.post) {
-    // 无法获取文章，返回404
+    // 无法获取文章，返回404.
     return {
       notFound: true
     }
