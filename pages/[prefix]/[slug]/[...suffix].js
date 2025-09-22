@@ -78,8 +78,10 @@ export async function getStaticProps({
   }
 
   if (!props?.post) {
-    // 无法获取文章
-    props.post = null
+    // 无法获取文章，返回404
+    return {
+      notFound: true
+    }
   } else {
     await processPostData(props, from)
   }
