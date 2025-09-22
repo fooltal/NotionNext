@@ -260,7 +260,6 @@ const LayoutSearch = props => {
  * @returns
  */
 const Layout404 = props => {
-const Layout404 = props => {
   return (
     <>
       <div className='md:-mt-20 text-black w-full h-screen text-center justify-center content-center items-center flex flex-col'>
