@@ -3,7 +3,7 @@ const Vercel = () => {
     <a
       href="https://vercel.com?utm_source=Craigary&utm_campaign=oss"
       target="_blank"
-      rel="noreferrer"
+      rel="nofollow noopener noreferrer"
       aria-label="Vercel"
     >
       <svg

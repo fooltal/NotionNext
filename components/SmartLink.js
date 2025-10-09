@@ -34,7 +34,7 @@ const SmartLink = ({ href, children, ...rest }) => {
       <a
         href={externalUrl}
         target='_blank'
-        rel='noopener noreferrer'
+        rel='noopener noreferrer nofollow'
         {...filterDOMProps(rest)}>
         {children}
       </a>
