@@ -38,65 +38,35 @@ export const getServerSideProps = async ctx => {
 }
 
 function generateLocalesSitemap(link, allPages, locale) {
-  // 确保链接不以斜杠结尾
-  if (link && link.endsWith('/')) {
-    link = link.slice(0, -1)
-  }
-
+  // 使用固定域名进行SEO优化
+  const siteUrl = 'https://blog.zhishigongxiang.com'
+  
   if (locale && locale.length > 0 && locale.indexOf('/') !== 0) {
     locale = '/' + locale
   }
   const dateNow = new Date().toISOString().split('T')[0]
+  
+  // 只保留网站首页，移除tag、分类等页面以优化SEO
   const defaultFields = [
     {
-      loc: `${link}${locale}`,
+      loc: `${siteUrl}${locale}`,
       lastmod: dateNow,
       changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/archive`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/category`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/rss/feed.xml`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/search`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/tag`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
+      priority: '1.0'
     }
   ]
   const postFields =
     allPages
-      ?.filter(p => p.status === BLOG.NOTION_PROPERTY_NAME.status_publish)
+      ?.filter(p => p.status === BLOG.NOTION_PROPERTY_NAME.status_publish && p.type === 'Post')
       ?.map(post => {
         const slugWithoutLeadingSlash = post?.slug.startsWith('/')
           ? post?.slug?.slice(1)
           : post.slug
         return {
-          loc: `${link}${locale}/${slugWithoutLeadingSlash}`,
+          loc: `${siteUrl}${locale}/${slugWithoutLeadingSlash}`,
           lastmod: new Date(post?.publishDay).toISOString().split('T')[0],
           changefreq: 'daily',
-          priority: '0.7'
+          priority: '0.8'
         }
       }) ?? []
 
